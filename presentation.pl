@@ -228,20 +228,20 @@ Questions..?
     <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
     <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
   </div>
-  <div id="logo">&nbsp;</div>
+  <div class="menu">
+  %= link_to 'Presentation mode', url_for('presentation')->query(present => 1), class => 'btn btn-success'
+  </div>
   <div id="impress">
     %= content
   </div>
   %= asset 'presentation.js'
-  % if($self->param('notes')) {
-  <style>
-    body {
-      margin-top: 5em;
-    }
-    .note { display: block; }
-  </style>
-  % } else {
+% if($self->param('present')) {
   <script>impress().init();</script>
-  % }
+% } else {
+  <style>
+    .note { display: block; }
+    .menu { display: block; }
+  </style>
+% }
 </body>
 </html>

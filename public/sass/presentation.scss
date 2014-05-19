@@ -8,16 +8,22 @@ body {
   background: url(../image/mojoconf-header-bg.jpg) 0 0 repeat-x fixed;
   font-family: 'PT Sans', sans-serif;
 }
-#logo {
-  display: block;
-  position: fixed;
-  background: url(../image/mojoconf-logo.png) 100% 100% no-repeat;
-  height: 100%;
-  width: 100%;
-}
 
 #name h1 { display: none; }
 #name { font-size: 4em; }
+
+.menu {
+  position: fixed;
+  top: 2px;
+  right: 2px;
+  display: none;
+  font-size: 14px;
+  z-index: 1000;
+
+  a {
+    font-size: 14px;
+  }
+}
 
 .note {
   color: #666;
