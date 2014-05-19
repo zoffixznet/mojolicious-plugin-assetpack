@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(uYKcPVoh6c5R0NpdEY5A-Q.woff) format(woff);
+}
+body {
+  background: url(../image/mojoconf-header-bg.jpg) 0 0 repeat-x fixed;
+  font-family: 'PT Sans', sans-serif;
+}
+#logo {
+  display: block;
+  position: fixed;
+  background: url(../image/mojoconf-logo.png) 100% 100% no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+#name h1 { display: none; }
+#name { font-size: 4em; }
+
+.note {
+  color: #666;
+  font-size: 0.7em;
+  text-align: left;
+  margin: 5em 0 20px;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  display: none;
+}
