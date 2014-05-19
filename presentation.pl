@@ -64,7 +64,7 @@ __DATA__
 <p>Jan Henning Thorsen</p>
 
 <div class="note">
-  Hello everybody. I'm very happy to be here with you at the very first
+  Hello. I'm very happy to be here with you at the very first
   Mojolicious conference.
   My name is Jan Henning Thorsen, and I work for a Norwegian Telecom company
   called Telenor, where I use Mojolicious to configure routers so our customers
@@ -169,6 +169,7 @@ enough, compared to the official tools.
 use Mojolicious::Lite;
 % end
 <div class="note">
+This example start out as a Mojolicious::Lite application.
 </div>
 % end
 
@@ -177,18 +178,32 @@ use Mojolicious::Lite;
 %= pre begin
 plugin "AssetPack";
 % end
+<div class="note">
+Then we load the AssetPack plugin with the default configuration, which in
+most cases JustWork &trade;.
+</div>
 % end
 
 %#===========================================================================
 %= slide 'define_asset', y => 275, stop => 1, begin
 %= pre begin
 app->asset(
-  "my_asset.css" => qw(
+  # Friendly name (moniker)
+  "my_asset.css",
+
+  # Files found in @{ $app->static->paths }
+  qw(
     css/impress-demo.css
     sass/presentation.scss
   )
 );
 % end
+<div class="note">
+Then we define our assets. The first argument is the "friendly name" (moniker)
+you will refere to later in your template. The rest of the arguments is a
+list of the input files. The input files need to be relative to one of the
+static directories.
+</div>
 % end
 
 %#===========================================================================
@@ -196,6 +211,10 @@ app->asset(
 %= pre begin
 app->start;
 % end
+<div class="note">
+Then at "start()" the assets are built and available to be used in your
+templates.
+</div>
 % end
 
 %#===========================================================================
@@ -205,10 +224,15 @@ app->start;
 <html>
 <head>
   <title><%= title %></title>
-  %%= asset 'my_asset.css'
+  %%= asset "my_asset.css"
 </head>
 </html>
 % end
+<div class="note">
+In your template, you can then generate css or javascript tags using the
+"asset()" helper again. You only give one argument to the helper this:
+The friendly name defined in you application.
+</div>
 % end
 
 %#===========================================================================
