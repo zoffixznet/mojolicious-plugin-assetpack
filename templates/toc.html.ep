@@ -1,0 +1,12 @@
+<ul>
+  <li>What is an asset?</li>
+  <li>What is AssetPack?</li>
+  <li>How does it work?</li>
+  <li>Customization</li>
+  <li>Gotchas</li>
+  <li>Extensions</li>
+</ul>
+<div class="note">
+Through this talk, I will explain what the plugin can do, how it works
+and ways to customize and extend it. But first...What is an asset?
+</div>

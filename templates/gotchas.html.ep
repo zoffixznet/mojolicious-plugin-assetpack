@@ -1,0 +1,5 @@
+<h1 class="text-center">Gotchas</h1>
+<div class="note">
+There are especially one thing you need to be aware of when
+working with this plugin and using LESS or SASS...
+</div>

@@ -1,0 +1,18 @@
+%= pre begin
+app->asset(
+  # Friendly name (moniker)
+  "my_asset.css",
+
+  # Files found in @{ $app->static->paths }
+  qw(
+    css/impress-demo.css
+    sass/presentation.scss
+  )
+);
+% end
+<div class="note">
+Then we define our assets. The first argument is the "friendly name" (moniker)
+you will refer to later in your template. The rest of the arguments is a
+list of the input files. The input files need to be relative to one of the
+static directories.
+</div>

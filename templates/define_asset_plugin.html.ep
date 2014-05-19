@@ -1,0 +1,7 @@
+%= pre begin
+plugin "AssetPack";
+% end
+<div class="note">
+Then we load the AssetPack plugin with the default configuration, which in
+most cases JustWork &trade;.
+</div>

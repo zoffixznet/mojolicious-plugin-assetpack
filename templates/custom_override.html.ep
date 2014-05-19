@@ -1,0 +1,21 @@
+<h1 class="text-center">Override default preprocessor</h1>
+%= pre begin
+$app->asset->preprocessors->remove('css');
+$app->asset->preprocessors->add(
+  css => sub {
+    my($assetpack, $data, $filename) = @_;
+
+    if($ENV{MONDAY_MORNING_FUN_MODE} and 5 < rand 10) {
+      $$data = "body { background: black; }";
+    }
+  }
+);
+% end
+<div class="note">
+If you want to replace a default preprocessors, you need to remove the default
+first. The reason for this is that a given filetype can be processed by multiple
+preprocessors, so adding a new won't replace the old.
+<br>
+The preprocessors example you see here is not something I recommend. If anything,
+it might work as job security.
+</div>

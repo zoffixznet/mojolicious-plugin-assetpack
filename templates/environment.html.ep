@@ -1,0 +1,14 @@
+<h1 class="text-center">Environments</h1>
+<div class="row">
+  <div class="col-xs-5 text-center bg-primary"><h2>Production</h2></div>
+  <div class="col-xs-2 text-center"><h2>V.S</h2></div>
+  <div class="col-xs-5 text-center bg-danger"><h2>Development</h2></div>
+</div>
+<div class="note">
+So in production mode all the assets are crammed together to one cached,
+minifed asset which the regular visitor will love to download, but a hacker
+will hate. (Since it's minified). In development mode on the other hand,
+AssetPack will simply compile SASS, LESS and CoffeeScript into something
+the browser can understand. The output will be readable code - not minified,
+so you can easier debug typos and other weird stuff in your javascript.
+</div>

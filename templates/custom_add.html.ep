@@ -1,0 +1,17 @@
+<h1 class="text-center">Custom preprocessors</h1>
+%= pre begin
+$app->asset->preprocessors->add(
+  jpeg => sub {
+    my($assetpack, $data, $filename) = @_;
+    $$data = Some::JPEG::Minifier->crunch($$data);
+  },
+);
+% end
+<div class="note">
+To add a new preprocessors you need to use the "add()" method on the
+"Mojolicious::Plugin::AssetPack::Preprocessors" object. This method takes
+a file type and a callback to modify the input data. The "$data" variable
+is a scalar ref that contains the original data. This scalar ref can be
+modified anyway you like. The example above calls a "crunch()" method on
+a made up library which returns a minified version of the input JPEG.
+</div>

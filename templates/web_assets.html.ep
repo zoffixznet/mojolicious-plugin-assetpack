@@ -1,0 +1,14 @@
+<h1 class="text-center">Assets from the internet</h1>
+%= pre begin
+app->asset('bundle.js' => (
+  'http://cdnjs.cloudflare.com/es5-shim.js',
+  'http://cdnjs.cloudflare.com/es5-sham.js',
+  'http://code.jquery.com/jquery-1.11.0.js',
+  '/js/myapp.js',
+));
+% end
+<div class="note">
+Ever tired of using "wget" or "curl" to download assets and then include them
+in your project? AssetPack got your back: Just drop in a full URL and
+Mojolicious::UserAgent will download the assets for you.
+</div>

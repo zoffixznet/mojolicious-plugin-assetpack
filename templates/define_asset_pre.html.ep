@@ -1,0 +1,8 @@
+<h1 class="text-center">Define an asset</h1>
+%= pre begin
+#!/usr/bin/env perl
+use Mojolicious::Lite;
+% end
+<div class="note">
+This example start out as a Mojolicious::Lite application.
+</div>

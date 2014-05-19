@@ -1,0 +1,14 @@
+<p>Jan Henning Thorsen presents</p>
+<h1 class="text-center">Mojolicious::Plugin::AssetPack</h1>
+<p><a href="http://mojoconf.org">@ Mojoconf2014</a></p>
+
+<div class="note">
+  Hello. I'm very happy to be here with you at the very first
+  Mojolicious conference.
+  My name is Jan Henning Thorsen. I work for a Norwegian Telecom company
+  called Telenor, where I use Mojolicious to configure routers so our customers
+  can access the Internet.
+
+  Today I'm here to tell you about a Mojolicious plugin called
+  "Mojolicious::Plugin::AssetPack".
+</div>

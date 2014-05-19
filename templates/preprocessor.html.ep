@@ -1,0 +1,6 @@
+<h1 class="text-center">Preprocessors</h1>
+<div class="note">
+The way AssetPack convert files is by mapping file extensions to a pre-processor.
+The most common pre-processors are detected on startup, but you can also
+redefine or add custom pre-processors if you like. More on this later on.
+</div>
