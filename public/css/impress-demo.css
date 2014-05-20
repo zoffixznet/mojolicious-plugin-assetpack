@@ -46,7 +46,7 @@
 */
 .impress-enabled .step {
     margin: 0;
-    opacity: 0.3;
+    opacity: 0.5;
 
     -webkit-transition: opacity 1s;
     -moz-transition:    opacity 1s;

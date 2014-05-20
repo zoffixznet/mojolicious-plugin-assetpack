@@ -27,9 +27,15 @@ get '/' => sub {
 
 app->helper(
   pre => sub {
-    my($self, $content) = @_;
+    my $content = pop;
+    my($self, %args) = @_;
 
-    $self->tag(pre => class => 'text-left', Mojo::ByteStream->new($content->()));
+    $self->tag(
+      'pre',
+      class => join(' ', 'text-left', grep { $_ } delete $args{class}),
+      %args,
+      Mojo::ByteStream->new($content->()),
+    );
   },
 );
 
@@ -100,6 +106,7 @@ and ways to customize and extend it. But first...What is an asset?
 <h1>An asset is a static file.</h1>
 
 <div class="note">
+An asset is content which is static from the perspective from many users.
 ...such as css, javascript and images. These assets are often many and not very
 space effective. Example: You split your javascript into multiple files for
 easy development, but that is no good for the browser, since it has to
@@ -135,7 +142,19 @@ inheritance and functions inside your CSS.
 % end
 
 %#===========================================================================
-%= slide 'deps', begin
+%= slide 'inside', stop => 1, begin
+<h2>Inner workings</h2>
+<div class="note">
+</div>
+% end
+
+%#===========================================================================
+%= slide 'processors', y => 200, begin
+<h2>Preprocessors</h2>
+% end
+
+%#===========================================================================
+%= slide 'formats', begin
 <h1>Supported formats</h1>
 <dl class="dl-horizontal">
   <dt>.css</dt>
@@ -186,7 +205,7 @@ most cases JustWork &trade;.
 % end
 
 %#===========================================================================
-%= slide 'define_asset', y => 275, stop => 1, begin
+%= slide 'define_asset', y => 340, stop => 1, begin
 %= pre begin
 app->asset(
   # Friendly name (moniker)
@@ -208,7 +227,7 @@ static directories.
 % end
 
 %#===========================================================================
-%= slide 'define_asset_post', y => 420, begin
+%= slide 'define_asset_post', y => 550, begin
 %= pre begin
 app->start;
 % end
@@ -235,18 +254,50 @@ In your template, you can then generate css or javascript tags using the
 The friendly name defined in you application.
 </div>
 % end
+
 %#===========================================================================
 %= slide 'web_assets', begin
+<h1>Assets from the internet</h1>
+%= pre begin
 app->asset('bundle.js' => (
-  'http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.js',
-  'http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-sham.js',
+  'http://cdnjs.cloudflare.com/es5-shim.js',
+  'http://cdnjs.cloudflare.com/es5-sham.js',
   'http://code.jquery.com/jquery-1.11.0.js',
   '/js/myapp.js',
 ));
+% end
 <div class="note">
 Ever tired of using "wget" or "curl" to download assets and then include them
 in your project? AssetPack got your back: Just drop in a full URL and
 Mojolicious::UserAgent will download the assets for you.
+</div>
+% end
+
+%#===========================================================================
+%= slide 'environment', begin
+<h1 class="text-center">Environments</h1>
+<div class="row">
+  <div class="col-xs-5 text-center bg-primary"><h2>Production</h2></div>
+  <div class="col-xs-2 text-center"><h2>V.S</h2></div>
+  <div class="col-xs-5 text-center bg-danger"><h2>Development</h2></div>
+</div>
+<div class="note">
+So in production mode all the assets are crammed together to one cached,
+minifed asset which the regular visitor will love to download, but a hacker
+will hate. (Since it's minified). In development mode on the other hand,
+AssetPack will simply compile SASS, LESS and CoffeeScript into something
+the browser can understand. The output will be readable code - not minified,
+so you can easier debug typos and other weird stuff in your javascript.
+</div>
+% end
+
+%#===========================================================================
+%= slide 'env_no_cache', begin
+<h2 class="text-center">MOJO_ASSETPACK_NO_CACHE=1</h2>
+<div class="note">
+You can also set the MOJO_ASSETPACK_NO_CACHE environment variable, if you
+want the assets to be compiled on each request, instead of using the cached
+files created on "start()".
 </div>
 % end
 
