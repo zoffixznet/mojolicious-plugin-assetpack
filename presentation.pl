@@ -239,6 +239,10 @@ The friendly name defined in you application.
 %= slide 'summary', begin
 To summarize...
 Questions..?
+
+Presentation is powered by
+<%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %> and
+<%= link_to 'Mojolicious', 'http://mojolicio.us' %>.
 % end
 
 @@ layouts/slides.html.ep
