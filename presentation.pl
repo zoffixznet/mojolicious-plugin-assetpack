@@ -13,6 +13,7 @@ app->asset(
     sass/bootstrap.scss
   )
 );
+
 app->asset(
   'presentation.js' => qw(
     js/impress.js
@@ -232,6 +233,20 @@ templates.
 In your template, you can then generate css or javascript tags using the
 "asset()" helper again. You only give one argument to the helper this:
 The friendly name defined in you application.
+</div>
+% end
+%#===========================================================================
+%= slide 'web_assets', begin
+app->asset('bundle.js' => (
+  'http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.js',
+  'http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-sham.js',
+  'http://code.jquery.com/jquery-1.11.0.js',
+  '/js/myapp.js',
+));
+<div class="note">
+Ever tired of using "wget" or "curl" to download assets and then include them
+in your project? AssetPack got your back: Just drop in a full URL and
+Mojolicious::UserAgent will download the assets for you.
 </div>
 % end
 
