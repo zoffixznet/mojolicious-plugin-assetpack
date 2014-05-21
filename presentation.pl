@@ -66,9 +66,10 @@ app->start;
 __DATA__
 @@ presentation.html.ep
 %#===========================================================================
-%= slide 'intro', class => 'text-center', begin
-<h2 class="text-center">Mojolicious::Plugin::AssetPack</h2>
-<p>Jan Henning Thorsen</p>
+%= slide 'start', class => 'text-center', begin
+<p>Jan Henning Thorsen presents</p>
+<h1 class="text-center">Mojolicious::Plugin::AssetPack</h1>
+<p><a href="http://mojoconf.org">@ Mojoconf2014</a></p>
 
 <div class="note">
   Hello. I'm very happy to be here with you at the very first
@@ -91,8 +92,8 @@ __DATA__
   <li>What is AssetPack?</li>
   <li>How does it work?</li>
   <li>Customization</li>
-  <li>Extensions</li>
   <li>Gotchas</li>
+  <li>Extensions</li>
 </ul>
 
 <div class="note">
@@ -143,7 +144,7 @@ inheritance and functions inside your CSS.
 
 %#===========================================================================
 %= slide 'preprocessors', stop => 1, begin
-<h2>Pre-processors</h2>
+<h1 class="text-center">Preprocessors</h1>
 <div class="note">
 The way AssetPack convert files is by mapping file extensions to a pre-processor.
 The most common pre-processors are detected on startup, but you can also
@@ -152,8 +153,8 @@ redefine or add custom pre-processors if you like. More on this later on.
 % end
 
 %#===========================================================================
-%= slide 'formats', begin
-<h1>Default pre-processors</h1>
+%= slide 'formats', y => 800, begin
+<h1 class="text-center">Default pre-processors</h1>
 <dl class="dl-horizontal">
   <dt>.css</dt>
   <dd><a href="https://metacpan.org/pod/CSS::Minifier::XS">CSS::Minifier::XS</a></dd>
@@ -180,8 +181,8 @@ enough, compared to the official tools.
 % end
 
 %#===========================================================================
-%= slide 'define_asset_pre', y => 0, stop => 1, begin
-<h2>Define asset</h2>
+%= slide 'define_asset_pre', y => 30, stop => 1, begin
+<h1>Define asset</h1>
 %= pre begin
 #!/usr/bin/env perl
 use Mojolicious::Lite;
@@ -237,7 +238,7 @@ templates.
 
 %#===========================================================================
 %= slide 'include_asset', begin
-<h2>Include assets</h2>
+<h1>Include assets</h1>
 %= pre begin
 <html>
 <head>
@@ -321,7 +322,7 @@ guaranty.
 
 %#===========================================================================
 %= slide 'custom_add', begin
-<h1>Custom preprocessors</h2>
+<h1>Custom preprocessors</h1>
 %= pre begin
 $app->asset->preprocessors->add(
   jpeg => sub {
@@ -362,13 +363,51 @@ type will be run in the order they are defined.
 % end
 
 %#===========================================================================
-%= slide 'summary', begin
-To summarize...
-Questions..?
+%= slide 'extensions', begin
+<h1>Mojolicious::Plugin::Bootstrap3</h1>
+% end
 
-Presentation is powered by
-<%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %> and
-<%= link_to 'Mojolicious', 'http://mojolicio.us' %>.
+%#===========================================================================
+%= slide 'gotchas', begin
+<h1 class="text-center">Caching issues</h1>
+<div class="note">
+The MD5 sum generated is only for the top level input files. This means that
+if the files include other files (like SASS), then these will not be included
+in the calculation. Patches to fix this is more than welcome.
+</div>
+% end
+
+%#===========================================================================
+%= slide 'sellingpoints', begin
+<h1>Sellingpoints</h1>
+% end
+
+%#===========================================================================
+%= slide 'summary', begin
+<h1>Sellingpoints</h1>
+<ul>
+  <li>Avoid caching issues</li>
+  <li>Use less bandwidth</li>
+  <li>Serve your web page faster</li>
+</ul>
+<div class="note">
+So the main sellingpoints to me is that you avoid caching issues with the
+generated filename. You use less bandwidth, since the assets are minified.
+The web page is served faster becuase the browser need to do less requests
+to the webserver. This is especially true for mobile phones.
+</div>
+% end
+
+%#===========================================================================
+%= slide 'end', begin
+<h1>Questions?</h1>
+<p>
+  This presentation was powered by
+  <%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %>,
+  <%= link_to 'Perl', 'http://perl.org' %>,
+  <%= link_to 'Mojolicious', 'http://mojolicio.us' %> and
+  <%= link_to 'AssetPack', 'http://metacpan.org/pod/Mojolicious::Plugin::AssetPack' %>.
+</p>
 % end
 
 @@ layouts/slides.html.ep
