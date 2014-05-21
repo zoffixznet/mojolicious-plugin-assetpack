@@ -1,4 +1,4 @@
-<h1>Sellingpoints</h1>
+<h1 class="text-center">Sellingpoints</h1>
 <ul>
   <li>Avoid caching issues</li>
   <li>Use less bandwidth</li>

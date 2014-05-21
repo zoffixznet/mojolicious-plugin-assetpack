@@ -1,4 +1,4 @@
-<h1>Define asset</h1>
+<h1 class="text-center">Define an asset</h1>
 %= pre begin
 #!/usr/bin/env perl
 use Mojolicious::Lite;

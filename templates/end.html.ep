@@ -1,4 +1,4 @@
-<h1>Questions?</h1>
+<h1 class="text-center">Questions?</h1>
 <p>
   This presentation was powered by
   <%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %>,

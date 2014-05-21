@@ -1,11 +1,12 @@
-<h1>Override default preprocessor</h1>
+<h1 class="text-center">Override default preprocessor</h1>
 %= pre begin
 $app->asset->preprocessors->remove('css');
 $app->asset->preprocessors->add(
   css => sub {
     my($assetpack, $data, $filename) = @_;
+
     if($ENV{MONDAY_MORNING_FUN_MODE} and 5 < rand 10) {
-      $$data = "/* mohahahaha! */";
+      $$data = "body { background: black; }";
     }
   }
 );

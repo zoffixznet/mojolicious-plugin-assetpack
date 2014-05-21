@@ -1,4 +1,4 @@
-<h1>Include assets</h1>
+<h1 class="text-center">Include assets</h1>
 %= pre begin
 <html>
 <head>

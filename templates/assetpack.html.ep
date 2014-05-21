@@ -1,4 +1,4 @@
-<h1>How does AssetPack work?</h1>
+<h1 class="text-center">How does AssetPack work?</h1>
 %= pre begin
               .--------------.
   [a.css]-----|              |

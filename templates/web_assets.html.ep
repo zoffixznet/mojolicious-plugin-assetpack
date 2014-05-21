@@ -1,4 +1,4 @@
-<h1>Assets from the internet</h1>
+<h1 class="text-center">Assets from the internet</h1>
 %= pre begin
 app->asset('bundle.js' => (
   'http://cdnjs.cloudflare.com/es5-shim.js',

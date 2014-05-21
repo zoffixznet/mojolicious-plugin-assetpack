@@ -85,6 +85,7 @@ __DATA__
 %= slide 'custom_add'
 %= slide 'custom_override'
 %= slide 'extensions'
+%= slide 'bootstrap3'
 %= slide 'gotchas'
 %= slide 'sellingpoints'
 %= slide 'end'
