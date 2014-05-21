@@ -1,0 +1,8 @@
+<h1>Questions?</h1>
+<p>
+  This presentation was powered by
+  <%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %>,
+  <%= link_to 'Perl', 'http://perl.org' %>,
+  <%= link_to 'Mojolicious', 'http://mojolicio.us' %> and
+  <%= link_to 'AssetPack', 'http://metacpan.org/pod/Mojolicious::Plugin::AssetPack' %>.
+</p>

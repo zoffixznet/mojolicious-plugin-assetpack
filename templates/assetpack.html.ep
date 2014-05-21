@@ -1,0 +1,22 @@
+<h1>How does AssetPack work?</h1>
+%= pre begin
+              .--------------.
+  [a.css]-----|              |
+  [b.less]----| Preprocessor |--->[my_asset.css]
+  [c.scss]----|              |
+              '--------------'
+% end
+<div class="note">
+So how can AssetPack help you out? AssetPack is a system which can cram
+all assets of the same type into one file. The example above reads
+a plain CSS file and a LESS and SASS file, and converts them all into one
+output CSS file. The output file is also minified. A minified file is a file
+where all private variables are shortened ("some_variable" turns into "a"),
+and whitespace is removed. The result is less requests hitting the server
+but also less bandwidth is used to transport the same information.
+
+<br>
+Note: LESS and SASS are CSS with superpowers. If you are still
+writing plain CSS, you should check out SASS. It allows you to use
+inheritance and functions inside your CSS.
+</div>

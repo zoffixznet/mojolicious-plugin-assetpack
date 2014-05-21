@@ -1,0 +1,16 @@
+<h1>File structure</h1>
+%= pre begin
+public/css/...
+public/js/...
+public/packed/some_asset-3ad5015...bb89b4add1de793.css
+% end
+<div class="note">
+So where does the assets go? The assets will be stored in a directory
+called "packed" in the first writable static directory defined in your
+project. The files generated will start with the friendly name you define,
+a dash, then a MD5 checksum follow by the extension of the assets. The MD5
+checksum is calculated by the content of all the input asset files. This
+is to make sure we avoid caching issues when a new visitors fetch the HTML
+with script or stylesheet tags. Adding a query string will NOT give the same
+guaranty.
+</div>

@@ -1,0 +1,9 @@
+<h1>An asset is a static file.</h1>
+
+<div class="note">
+An asset is content which is static from the perspective from many users.
+These files are typically css and javascript. These assets are often many and
+not very space effective. Example: You split your javascript into multiple files
+for easy development, but that is no good for the browser, since it has to
+download all those files. Many requests to the webserver slows down the website.
+</div>

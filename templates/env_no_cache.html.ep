@@ -1,0 +1,6 @@
+<h2 class="text-center">MOJO_ASSETPACK_NO_CACHE=1</h2>
+<div class="note">
+You can also set the MOJO_ASSETPACK_NO_CACHE environment variable, if you
+want the assets to be compiled on each request, instead of using the cached
+files created on "start()".
+</div>

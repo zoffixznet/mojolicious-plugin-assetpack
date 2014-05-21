@@ -1,0 +1,7 @@
+%= pre begin
+app->start;
+% end
+<div class="note">
+Then at "start()" the assets are built and available to be used in your
+templates.
+</div>

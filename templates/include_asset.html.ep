@@ -1,0 +1,14 @@
+<h1>Include assets</h1>
+%= pre begin
+<html>
+<head>
+  <title><%= title %></title>
+  %%= asset "my_asset.css"
+</head>
+</html>
+% end
+<div class="note">
+In your template, you can then generate css or javascript tags using the
+"asset()" helper again. You only give one argument to the helper this:
+The friendly name defined in you application.
+</div>

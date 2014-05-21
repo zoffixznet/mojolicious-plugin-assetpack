@@ -1,0 +1,12 @@
+<h1>Sellingpoints</h1>
+<ul>
+  <li>Avoid caching issues</li>
+  <li>Use less bandwidth</li>
+  <li>Serve your web page faster</li>
+</ul>
+<div class="note">
+So the main sellingpoints to me is that you avoid caching issues with the
+generated filename. You use less bandwidth, since the assets are minified.
+The web page is served faster becuase the browser need to do less requests
+to the webserver. This is especially true for mobile phones.
+</div>
