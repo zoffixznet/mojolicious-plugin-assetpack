@@ -321,6 +321,24 @@ a made up library which returns a minifed version of the input JPEG.
 % end
 
 %#===========================================================================
+%= slide 'custom_override', begin
+%= pre begin
+$app->asset->preprocessors->remove('css');
+$app->asset->preprocessors->add(
+  css => sub {
+    my($assetpack, $data, $filename) = @_;
+    $$data = "/* mohahahaha! */" if $ENV{MONDAY_MORNING_FUN_MODE} and 5 < rand 10;
+  },
+);
+% end
+<div class="note">
+If you want to replace a default preprocessors, you need to remove the default
+first. The reason for this is that all the preprocessors added to the same file
+type will be run in the order they are defined.
+</div>
+% end
+
+%#===========================================================================
 %= slide 'summary', begin
 To summarize...
 Questions..?
