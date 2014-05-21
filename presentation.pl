@@ -300,6 +300,27 @@ files created on "start()".
 % end
 
 %#===========================================================================
+%= slide 'custom_add', begin
+<h1>Custom preprocessors</h2>
+%= pre begin
+$app->asset->preprocessors->add(
+  jpeg => sub {
+    my($assetpack, $data, $filename) = @_;
+    $$data = Some::JPEG::Minifier->crunch($$data);
+  },
+);
+% end
+<div class="note">
+To add a new preprocessors you need to use the "add()" method on the
+"Mojolicious::Plugin::AssetPack::Preprocessors" object. This method takes
+a filetype and a callback to modify the input data. The "$data" variable
+is a scalar ref that contains the the original data. This scalar ref can be
+modified anyway you like. The example above calles a "crunch()" method on
+a made up library which returns a minifed version of the input JPEG.
+</div>
+% end
+
+%#===========================================================================
 %= slide 'summary', begin
 To summarize...
 Questions..?
