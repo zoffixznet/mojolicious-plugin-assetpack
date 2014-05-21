@@ -73,7 +73,7 @@ __DATA__
 <div class="note">
   Hello. I'm very happy to be here with you at the very first
   Mojolicious conference.
-  My name is Jan Henning Thorsen, and I work for a Norwegian Telecom company
+  My name is Jan Henning Thorsen. I work for a Norwegian Telecom company
   called Telenor, where I use Mojolicious to configure routers so our customers
   can access the Internet.
 
@@ -107,9 +107,9 @@ and ways to customize and extend it. But first...What is an asset?
 
 <div class="note">
 An asset is content which is static from the perspective from many users.
-...such as css, javascript and images. These assets are often many and not very
-space effective. Example: You split your javascript into multiple files for
-easy development, but that is no good for the browser, since it has to
+These files are typically css and javascript. These assets are often many and
+not very space effective. Example: You split your javascript into multiple files
+for easy development, but that is no good for the browser, since it has to
 download all those files. Many requests to the webserver slows down the website.
 </div>
 % end
@@ -142,20 +142,18 @@ inheritance and functions inside your CSS.
 % end
 
 %#===========================================================================
-%= slide 'inside', stop => 1, begin
-<h2>Inner workings</h2>
+%= slide 'preprocessors', stop => 1, begin
+<h2>Pre-processors</h2>
 <div class="note">
+The way AssetPack convert files is by mapping file extensions to a pre-processor.
+The most common pre-processors are detected on startup, but you can also
+redefine or add custom pre-processors if you like. More on this later on.
 </div>
 % end
 
 %#===========================================================================
-%= slide 'processors', y => 200, begin
-<h2>Preprocessors</h2>
-% end
-
-%#===========================================================================
 %= slide 'formats', begin
-<h1>Supported formats</h1>
+<h1>Default pre-processors</h1>
 <dl class="dl-horizontal">
   <dt>.css</dt>
   <dd><a href="https://metacpan.org/pod/CSS::Minifier::XS">CSS::Minifier::XS</a></dd>
