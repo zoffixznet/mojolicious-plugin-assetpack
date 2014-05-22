@@ -1,7 +1,6 @@
 <h1 class="text-center">Questions?</h1>
 <p class="text-center">
   <br>
-  <br>
   This presentation is powered by
   <br>
   <%= link_to 'impress.js', 'https://github.com/bartaz/impress.js' %>,

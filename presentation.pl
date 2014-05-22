@@ -48,7 +48,10 @@ app->helper(
 
     $self->stash->{p}++ unless delete $args{stop};
     $self->stash->{n}++;
-    $args{"data-$_"} = delete $args{$_} for grep { $args{$_} } qw( y z scale );
+    for my $k (grep { $args{$_} } qw( y z scale rotate_z rotate_x rotate_y )) {
+      (my $n = $k) =~ s!_!-!g;
+      $args{"data-$n"} = delete $args{$k};
+    }
 
     die "No markup for $name" unless $markup;
 
@@ -73,13 +76,13 @@ __DATA__
 %= slide 'assetpack', class => 'text-center'
 %= slide 'preprocessor', stop => 1
 %= slide 'formats', y => 800
-%= slide 'define_asset_pre', y => 30, stop => 1
+%= slide 'define_asset_pre', y => -10, stop => 1
 %= slide 'define_asset_plugin', y => 130, stop => 1
 %= slide 'define_asset', y => 340, stop => 1
 %= slide 'define_asset_post', y => 550
-%= slide 'include_asset'
-%= slide 'web_assets'
-%= slide 'environment'
+%= slide 'include_asset', y => 500
+%= slide 'web_assets', y => 500
+%= slide 'environment', rotate_x => 90
 %= slide 'env_no_cache'
 %= slide 'file_structure'
 %= slide 'custom_add'
