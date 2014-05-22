@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+# MOJO_MODE=production morbo presentation.pl
 use Mojolicious::Lite;
 
 plugin 'Bootstrap3' => css => [], js => [], jquery => 0;
