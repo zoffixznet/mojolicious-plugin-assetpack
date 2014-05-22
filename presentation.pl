@@ -84,11 +84,12 @@ __DATA__
 %= slide 'file_structure'
 %= slide 'custom_add'
 %= slide 'custom_override'
+%= slide 'gotchas'
+%= slide 'gotchas_filename'
+%= slide 'sellingpoints'
 %= slide 'extensions'
 %= slide 'bootstrap3'
 %= slide 'bootstrap3_usage'
-%= slide 'gotchas'
-%= slide 'sellingpoints'
 %= slide 'end'
 
 @@ layouts/slides.html.ep

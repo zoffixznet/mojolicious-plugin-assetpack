@@ -1,0 +1,6 @@
+<h1 class="text-center">The packed filenames</h1>
+<div class="note">
+The MD5 sum generated is only for the top level input files. This means that
+if the files include other files (like SASS), then these will not be included
+in the calculation. Patches to fix this is more than welcome.
+</div>
