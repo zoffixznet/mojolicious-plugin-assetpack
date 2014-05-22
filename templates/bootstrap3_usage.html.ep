@@ -1,0 +1,14 @@
+%= pre begin
+$app->plugin(
+  bootstrap3 => {
+    js => [qw( tooltip.js dropdown.js )],
+    jquery => 0,
+  },
+);
+% end
+<div class="note">
+Here you see an example on how to just include some of the javascript
+files instead of the whole bundle. You can also specify that you got
+your own jQuery loaded, instead of using the one that is bundled with
+this plugin.
+</div>

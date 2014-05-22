@@ -1,0 +1,8 @@
+<h1 class="text-center">Mojolicious::Plugin::Bootstrap3</h1>
+<div class="note">
+...that's why I created Mojolicious::Plugin::Bootstrap3.
+When you use this plugin, you will get all the Bootstrap3 features
+without downloading a single css/js-file. You can also customize
+the behavior right from the plugin or override the different SASS
+files, like "_variables.scss" for defining your own colors and such.
+</div>

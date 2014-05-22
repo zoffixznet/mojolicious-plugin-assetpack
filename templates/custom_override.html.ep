@@ -13,6 +13,9 @@ $app->asset->preprocessors->add(
 % end
 <div class="note">
 If you want to replace a default preprocessors, you need to remove the default
-first. The reason for this is that all the preprocessors added to the same file
-type will be run in the order they are defined.
+first. The reason for this is that a given filetype can be processed by multiple
+preprocessors, so adding a new won't replace the old.
+<br>
+The preprocessors example you see here is not something I recommend. If anything,
+it might work as job security.
 </div>

@@ -1,1 +1,8 @@
 <h1 class="text-center">Extensions</h1>
+<div class="note">
+If you like, you can use this module to create CPAN distributions for
+"Foundation" or any other major CSS / JS framework. I think that's a
+good idea, because I think it should be just as convenient for a Perl
+developer as for a Ruby developer to get bootstrapped with a well
+defined framework both in the backend and frontend.
+</div>
