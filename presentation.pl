@@ -9,6 +9,7 @@ $ENV{SASS_PATH} = Mojolicious::Plugin::Bootstrap3->asset_path('sass');
 
 app->asset(
   'presentation.css' => qw(
+    css/prettify.css
     css/impress-demo.css
     sass/presentation.scss
     sass/bootstrap.scss
@@ -17,6 +18,7 @@ app->asset(
 
 app->asset(
   'presentation.js' => qw(
+    js/prettify.js
     js/impress.js
   )
 );
@@ -30,7 +32,7 @@ app->helper(
 
     $self->tag(
       'pre',
-      class => join(' ', 'text-left', grep { $_ } delete $args{class}),
+      class => join(' ', qw( text-left ), grep { $_ } delete $args{class}), # prettyprint
       %args,
       Mojo::ByteStream->new($content->()),
     );
