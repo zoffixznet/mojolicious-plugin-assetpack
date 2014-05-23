@@ -24,8 +24,6 @@
 (function ( document, window ) {
     'use strict';
 
-    var history_index = 0;
-    
     // HELPER FUNCTIONS
     
     // `pfx` is a function that takes a standard CSS property name as a parameter
@@ -554,22 +552,13 @@
         var prev = function () {
             var prev = steps.indexOf( activeStep ) - 1;
             prev = prev >= 0 ? steps[ prev ] : steps[ steps.length-1 ];
-
-            if(history_index-- > 0) {
-              return history.go(-1);
-            }
-            else {
-              return goto(prev);
-            }
+            return goto(prev);
         };
         
         // `next` API function goes to next step (in document order)
         var next = function () {
             var next = steps.indexOf( activeStep ) + 1;
             next = next < steps.length ? steps[ next ] : steps[ 0 ];
-
-            history_index++;
-            
             return goto(next);
         };
         
