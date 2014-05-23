@@ -93,6 +93,7 @@ __DATA__
 %= slide 'extensions'
 %= slide 'bootstrap3'
 %= slide 'bootstrap3_usage'
+%= slide 'demo'
 %= slide 'end'
 
 @@ layouts/slides.html.ep
