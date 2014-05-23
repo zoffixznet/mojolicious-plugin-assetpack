@@ -70,6 +70,7 @@ app->defaults(layout => 'slides', title => 'Presentation');
 app->start;
 __DATA__
 @@ presentation.html.ep
+%= slide 'batman'
 %= slide 'start', class => 'text-center'
 %= slide 'toc'
 %= slide 'asset', class => 'text-center'
@@ -82,17 +83,17 @@ __DATA__
 %= slide 'define_asset_post', y => 550
 %= slide 'include_asset', y => 500
 %= slide 'web_assets', y => 500
-%= slide 'environment', rotate_x => 90
+%= slide 'environment'
 %= slide 'env_no_cache'
 %= slide 'file_structure'
-%= slide 'custom_add'
-%= slide 'custom_override'
+%= slide 'custom_add', y => 600
+%= slide 'custom_override', y => 600
 %= slide 'gotchas'
 %= slide 'gotchas_filename'
 %= slide 'sellingpoints'
-%= slide 'extensions'
-%= slide 'bootstrap3'
-%= slide 'bootstrap3_usage'
+%= slide 'extensions', y => -400
+%= slide 'bootstrap3', y => -400
+%= slide 'bootstrap3_usage', y => -400
 %= slide 'demo'
 %= slide 'end'
 
