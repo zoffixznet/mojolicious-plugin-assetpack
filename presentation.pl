@@ -20,6 +20,7 @@ app->asset(
   'presentation.js' => qw(
     js/prettify.js
     js/impress.js
+    js/assetpack.js
   )
 );
 
@@ -42,7 +43,7 @@ app->helper(
 app->helper(
   slide => sub {
     my($self, $name, %args) = @_;
-    my $markup = $self->render(template => $name, partial => 1);
+    my $markup = $self->render_to_string(template => $name);
     my $n = $self->stash->{n} || 0;
     my $p = $self->stash->{p} || 0;
 
@@ -115,13 +116,5 @@ __DATA__
     %= content
   </div>
   %= asset 'presentation.js'
-% if($self->param('present')) {
-  <script>impress().init();</script>
-% } else {
-  <style>
-    .note { display: block; }
-    .menu { display: block; }
-  </style>
-% }
 </body>
 </html>

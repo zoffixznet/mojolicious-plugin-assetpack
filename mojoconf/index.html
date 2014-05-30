@@ -1,0 +1,330 @@
+<html>
+<head>
+  <title>Presentation</title>
+  <link href="packed/presentation-fc40de4fbd9c8888be0a099b3b97dd7c.css" rel="stylesheet" />
+</head>
+<body class="impress-not-supported">
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+  <div class="menu">
+  <a class="btn btn-success" href="?present=1">Presentation mode</a>
+  </div>
+  <div id="impress">
+    <div class="step" data-x="0" data-z="0" id="batman"><p class="text-center">
+<img alt="batman" src="image/LEGO_Batman.png" style="width:120%;margin-left:-10%" />
+</p>
+</div>
+<div class="step text-center" data-x="1400" data-z="-200" id="start"><p>Jan Henning Thorsen presents</p>
+<h1 class="text-center">Mojolicious::Plugin::AssetPack</h1>
+<p><a href="http://mojoconf.org">@ Mojoconf2014</a></p>
+
+<div class="note">
+  Hello. I'm very happy to be here with you at the very first
+  Mojolicious conference.
+  My name is Jan Henning Thorsen. I work for a Norwegian Telecom company
+  called Telenor, where I use Mojolicious to configure routers so our customers
+  can access the Internet.
+
+  Today I'm here to tell you about a Mojolicious plugin called
+  "Mojolicious::Plugin::AssetPack".
+</div>
+</div>
+<div class="step" data-x="2800" data-z="-400" id="toc"><ul>
+  <li>What is an asset?</li>
+  <li>What is AssetPack?</li>
+  <li>How does it work?</li>
+  <li>Customization</li>
+  <li>Gotchas</li>
+  <li>Extensions</li>
+</ul>
+<div class="note">
+Through this talk, I will explain what the plugin can do, how it works
+and ways to customize and extend it. But first...What is an asset?
+</div>
+</div>
+<div class="step text-center" data-x="4200" data-z="-600" id="asset"><h1 class="text-center">An asset is a static file</h1>
+
+<div class="note">
+An asset is content which is static from the perspective from many users.
+These files are typically CSS and javascript. These assets are often many and
+not very space effective. Example: You split your javascript into multiple files
+for easy development, but that is no good for the browser, since it has to
+download all those files. Many requests to the web server slows down the website.
+</div>
+</div>
+<div class="step text-center" data-x="5600" data-z="-800" id="assetpack"><h1 class="text-center">How does AssetPack work?</h1>
+<pre class="text-left">
+              .--------------.
+  [a.css]-----|              |
+  [b.less]----| Preprocessor |---&gt;[my_asset.css]
+  [c.scss]----|              |
+              &#39;--------------&#39;
+</pre><div class="note">
+So how can AssetPack help you out? AssetPack is a system which can cram
+all assets of the same type into one file. The example above reads
+a plain CSS file and a LESS and SASS file, and converts them all into one
+output CSS file. The output file is also minified. A minified file is a file
+where all private variables are shortened ("some_variable" turns into "a"),
+and whitespace is removed. The result is less requests hitting the server
+but also less bandwidth is used to transport the same information.
+
+<br>
+Note: LESS and SASS are CSS with superpowers. If you are still
+writing plain CSS, you should check out SASS. It allows you to use
+inheritance and functions inside your CSS.
+</div>
+</div>
+<div class="step" data-x="7000" data-z="-1000" id="preprocessor"><h1 class="text-center">Preprocessors</h1>
+<div class="note">
+The way AssetPack convert files is by mapping file extensions to a pre-processor.
+The most common pre-processors are detected on startup, but you can also
+redefine or add custom pre-processors if you like. More on this later on.
+</div>
+</div>
+<div class="step" data-x="7000" data-y="800" data-z="-1000" id="formats"><h1 class="text-center">Default pre-processors</h1>
+<dl class="dl-horizontal">
+  <dt>.css</dt>
+  <dd><a href="https://metacpan.org/pod/CSS::Minifier::XS">CSS::Minifier::XS</a></dd>
+  <dt>.js</dt>
+  <dd><a href="https://metacpan.org/pod/JavaScript::Minifier::XS">JavaScript::Minifier::XS</a></dd>
+  <dt>.less</dt>
+  <dd><a href="http://lesscss.org/">LESS</a> (optional)</dd>
+  <dt>.coffee</dt>
+  <dd><a href="http://coffeescript.org">CoffeeScript</a> (optional)</dd>
+  <dt>.scss</dt>
+  <dd><a href="http://sass-lang.com/">SASS</a> (optional)</dd>
+</dl>
+<div class="note">
+AssetPack need some external helpers to get the job done: To minify plain
+CSS and javascript files, it use two CPAN modules called CSS::Minifier::XS
+and JavaScript::Minifier::XS.
+They are fast, because they are written in C, but they do require a compiler
+to be built. In addition, AssetPack supports CoffeeScript, LESS and SASS.
+These formats are compiled using the official compilers, so they require
+you to install Ruby and/or Node.js. I've found some modules on CPAN which
+in theory are supposed to do the same job, but they are simply not good
+enough, compared to the official tools.
+</div>
+</div>
+<div class="step" data-x="8400" data-y="-10" data-z="-1200" id="define_asset_pre"><h1 class="text-center">Define an asset</h1>
+<pre class="text-left">
+#!/usr/bin/env perl
+use Mojolicious::Lite;
+</pre><div class="note">
+This example start out as a Mojolicious::Lite application.
+</div>
+</div>
+<div class="step" data-x="8400" data-y="130" data-z="-1200" id="define_asset_plugin"><pre class="text-left">
+plugin &quot;AssetPack&quot;;
+</pre><div class="note">
+Then we load the AssetPack plugin with the default configuration, which in
+most cases JustWork &trade;.
+</div>
+</div>
+<div class="step" data-x="8400" data-y="340" data-z="-1200" id="define_asset"><pre class="text-left">
+app-&gt;asset(
+  # Friendly name (moniker)
+  &quot;my_asset.css&quot;,
+
+  # Files found in @{ $app-&gt;static-&gt;paths }
+  qw(
+    css/impress-demo.css
+    sass/presentation.scss
+  )
+);
+</pre><div class="note">
+Then we define our assets. The first argument is the "friendly name" (moniker)
+you will refer to later in your template. The rest of the arguments is a
+list of the input files. The input files need to be relative to one of the
+static directories.
+</div>
+</div>
+<div class="step" data-x="8400" data-y="550" data-z="-1200" id="define_asset_post"><pre class="text-left">
+app-&gt;start;
+</pre><div class="note">
+Then at "start()" the assets are built and available to be used in your
+templates.
+</div>
+</div>
+<div class="step" data-x="9800" data-y="500" data-z="-1400" id="include_asset"><h1 class="text-center">Include assets</h1>
+<pre class="text-left">
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Presentation&lt;/title&gt;
+  %= asset &quot;my_asset.css&quot;
+&lt;/head&gt;
+&lt;/html&gt;
+</pre><div class="note">
+In your template, you can then generate css or javascript tags using the
+"asset()" helper again. You only give one argument to the helper this:
+The friendly name defined in you application.
+</div>
+</div>
+<div class="step" data-x="11200" data-y="500" data-z="-1600" id="web_assets"><h1 class="text-center">Assets from the internet</h1>
+<pre class="text-left">
+app-&gt;asset(&#39;bundle.js&#39; =&gt; (
+  &#39;http://cdnjs.cloudflare.com/es5-shim.js&#39;,
+  &#39;http://cdnjs.cloudflare.com/es5-sham.js&#39;,
+  &#39;http://code.jquery.com/jquery-1.11.0.js&#39;,
+  &#39;/js/myapp.js&#39;,
+));
+</pre><div class="note">
+Ever tired of using "wget" or "curl" to download assets and then include them
+in your project? AssetPack got your back: Just drop in a full URL and
+Mojolicious::UserAgent will download the assets for you.
+</div>
+</div>
+<div class="step" data-x="12600" data-z="-1800" id="environment"><h1 class="text-center">Environments</h1>
+<div class="row">
+  <div class="col-xs-5 text-center bg-primary"><h2>Production</h2></div>
+  <div class="col-xs-2 text-center"><h2>V.S</h2></div>
+  <div class="col-xs-5 text-center bg-danger"><h2>Development</h2></div>
+</div>
+<div class="note">
+So in production mode all the assets are crammed together to one cached,
+minifed asset which the regular visitor will love to download, but a hacker
+will hate. (Since it's minified). In development mode on the other hand,
+AssetPack will simply compile SASS, LESS and CoffeeScript into something
+the browser can understand. The output will be readable code - not minified,
+so you can easier debug typos and other weird stuff in your javascript.
+</div>
+</div>
+<div class="step" data-x="14000" data-z="-2000" id="env_no_cache"><h2 class="text-center">MOJO_ASSETPACK_NO_CACHE=1</h2>
+<div class="note">
+You can also set the MOJO_ASSETPACK_NO_CACHE environment variable, if you
+want the assets to be compiled on each request, instead of using the cached
+files created on "start()".
+</div>
+</div>
+<div class="step" data-x="15400" data-z="-2200" id="file_structure"><h1 class="text-center">File structure</h1>
+<pre class="text-left">
+public/css/...
+public/js/...
+public/packed/some_asset-3ad5015...bb89b4add1de793.css
+</pre><div class="note">
+So where does the assets go? The assets will be stored in a directory
+called "packed" in the first writable static directory defined in your
+project. The files generated will start with the friendly name you define,
+a dash, then a MD5 checksum follow by the extension of the assets. The MD5
+checksum is calculated by the content of all the input asset files. This
+is to make sure we avoid caching issues when a new visitors fetch the HTML
+with script or stylesheet tags. Adding a query string will NOT give the same
+guaranty.
+</div>
+</div>
+<div class="step" data-x="16800" data-y="600" data-z="-2400" id="custom_add"><h1 class="text-center">Custom preprocessors</h1>
+<pre class="text-left">
+$app-&gt;asset-&gt;preprocessors-&gt;add(
+  jpeg =&gt; sub {
+    my($assetpack, $data, $filename) = @_;
+    $$data = Some::JPEG::Minifier-&gt;crunch($$data);
+  },
+);
+</pre><div class="note">
+To add a new preprocessors you need to use the "add()" method on the
+"Mojolicious::Plugin::AssetPack::Preprocessors" object. This method takes
+a file type and a callback to modify the input data. The "$data" variable
+is a scalar ref that contains the original data. This scalar ref can be
+modified anyway you like. The example above calls a "crunch()" method on
+a made up library which returns a minified version of the input JPEG.
+</div>
+</div>
+<div class="step" data-x="18200" data-y="600" data-z="-2600" id="custom_override"><h1 class="text-center">Override default preprocessor</h1>
+<pre class="text-left">
+$app-&gt;asset-&gt;preprocessors-&gt;remove(&#39;css&#39;);
+$app-&gt;asset-&gt;preprocessors-&gt;add(
+  css =&gt; sub {
+    my($assetpack, $data, $filename) = @_;
+
+    if($ENV{MONDAY_MORNING_FUN_MODE} and 5 &lt; rand 10) {
+      $$data = &quot;body { background: black; }&quot;;
+    }
+  }
+);
+</pre><div class="note">
+If you want to replace a default preprocessors, you need to remove the default
+first. The reason for this is that a given filetype can be processed by multiple
+preprocessors, so adding a new won't replace the old.
+<br>
+The preprocessors example you see here is not something I recommend. If anything,
+it might work as job security.
+</div>
+</div>
+<div class="step" data-x="19600" data-z="-2800" id="gotchas"><h1 class="text-center">Gotchas</h1>
+<div class="note">
+There are especially one thing you need to be aware of when
+working with this plugin and using LESS or SASS...
+</div>
+</div>
+<div class="step" data-x="21000" data-z="-3000" id="gotchas_filename"><h1 class="text-center">The packed filenames</h1>
+<div class="note">
+The MD5 sum generated is only for the top level input files. This means that
+if the files include other files (like SASS), then these will not be included
+in the calculation. Patches to fix this is more than welcome.
+</div>
+</div>
+<div class="step" data-x="22400" data-z="-3200" id="sellingpoints"><h1 class="text-center">Sellingpoints</h1>
+<ul>
+  <li>Avoid caching issues</li>
+  <li>Use less bandwidth</li>
+  <li>Serve your web page faster</li>
+</ul>
+<div class="note">
+So the main sellingpoints to me is that you avoid caching issues with the
+generated filename. You use less bandwidth, since the assets are minified.
+The web page is served faster becuase the browser need to do less requests
+to the webserver. This is especially true for mobile phones.
+</div>
+</div>
+<div class="step" data-x="23800" data-y="-400" data-z="-3400" id="extensions"><h1 class="text-center">Extensions</h1>
+<div class="note">
+If you like, you can use this module to create CPAN distributions for
+"Foundation" or any other major CSS / JS framework. I think that's a
+good idea, because I think it should be just as convenient for a Perl
+developer as for a Ruby developer to get bootstrapped with a well
+defined framework both in the backend and frontend.
+</div>
+</div>
+<div class="step" data-x="25200" data-y="-400" data-z="-3600" id="bootstrap3"><h1 class="text-center">Mojolicious::Plugin::Bootstrap3</h1>
+<div class="note">
+...that's why I created Mojolicious::Plugin::Bootstrap3.
+When you use this plugin, you will get all the Bootstrap3 features
+without downloading a single css/js-file. You can also customize
+the behavior right from the plugin or override the different SASS
+files, like "_variables.scss" for defining your own colors and such.
+</div>
+</div>
+<div class="step" data-x="26600" data-y="-400" data-z="-3800" id="bootstrap3_usage"><pre class="text-left">
+$app-&gt;plugin(
+  bootstrap3 =&gt; {
+    js =&gt; [qw( tooltip.js dropdown.js )],
+    jquery =&gt; 0,
+  },
+);
+</pre><div class="note">
+Here you see an example on how to just include some of the javascript
+files instead of the whole bundle. You can also specify that you got
+your own jQuery loaded, instead of using the one that is bundled with
+this plugin.
+</div>
+</div>
+<div class="step" data-x="28000" data-z="-4000" id="demo"><h1 class="text-center">Live demo</h1>
+<p class="text-center">Oh yeah!</p>
+</div>
+<div class="step" data-x="29400" data-z="-4200" id="end"><h1 class="text-center">Questions?</h1>
+<p class="text-center">
+  <br>
+  This presentation is powered by
+  <br>
+  <a href="https://github.com/bartaz/impress.js">impress.js</a>,
+  <a href="http://mojolicio.us">Mojolicious</a> and
+  <a href="http://metacpan.org/pod/Mojolicious::Plugin::AssetPack">AssetPack</a>.
+</p>
+</div>
+
+  </div>
+  <script src="packed/presentation-9d4ab1b5b59c3d9aad2163e561882276.js"></script>
+</body>
+</html>
