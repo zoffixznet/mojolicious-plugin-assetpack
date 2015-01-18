@@ -119,6 +119,7 @@ Add your custom transformer to AssetPack config:
   app->asset->preprocessor(
     Browserify => {
       extensions   => [qw( js jsx )],
+      dependencies => ["through2"],
       transformers => [
         app->home->rel_file("react-aliasify.js"),
         [reactify => {es6 => 1}],
@@ -174,6 +175,13 @@ BEGIN {
 
 =head1 ATTRIBUTES
 
+=head2 dependencies
+
+  $array = $self->dependencies;
+  $self = $self->dependencies(["through2"]);
+
+Extra node modules to install when L</process> is called.
+
 =head2 executable
 
   $path = $self->executable;
@@ -200,7 +208,8 @@ to the transformer. The values in the hash are transformer argumemts.
 
 =cut
 
-has executable => sub { File::Which::which('nodejs') || File::Which::which('node') };
+has dependencies   => sub { [] };
+has executable     => sub { File::Which::which('nodejs') || File::Which::which('node') };
 has npm_executable => sub { File::Which::which('npm') };
 has transformers   => sub { [] };
 
@@ -289,6 +298,7 @@ sub process {
   warn "[Browserify] MODULE_DEPS_TRANSFORMERS=$ENV{MODULE_DEPS_TRANSFORMERS}\n" if DEBUG;
 
   $self->_install_node_module($_) for qw( browser-pack module-deps JSONStream );
+  $self->_install_node_module($_) for @{$self->dependencies};
   $self->_install_node_module($_) for map { ref $_ ? $_->[0] : $_ } @transformers;
   $self->_find_node_modules($text, $path, {});    # install node deps
   $self->_run([$self->executable, catfile(dirname(__FILE__), 'module-deps.js'), keys %changed], undef, $text, \$err);
