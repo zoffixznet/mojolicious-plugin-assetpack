@@ -9,6 +9,7 @@ use Cwd            ();
 use File::Basename ();
 use File::Path     ();
 use File::Spec     ();
+use File::Glob     ();
 use constant NO_CACHE => $ENV{MOJO_ASSETPACK_NO_CACHE} || 0;
 use constant DEBUG    => $ENV{MOJO_ASSETPACK_DEBUG}    || 0;
 
@@ -242,12 +243,25 @@ sub _make_error_asset {
   }
 }
 
+sub _spritify {
+  my ( $self, $path ) = @_;
+  my @sprites = File::Glob::bsd_glob "$path/*";
+  open my $pic_fh, '>', 'public/sprite.png' or die $!;
+  open my $css_fh, '>', 'public/sprite.css' or die $!;
+  print $pic_fh "$_\n" for @sprites;
+  print $css_fh "$_\n" for @sprites;
+
+  return 'sprite.css';
+}
+
 sub _process {
   my ($self, $moniker, @sources) = @_;
   my ($name, $ext) = (_name($moniker), _ext($moniker));
   my ($asset, $file, $re, @checksum);
 
   @sources = map {
+    s/:sprite$// and $_ = $self->_spritify($_);
+
     my $asset = $self->_find(split '/', $_) || (/^https?:/ ? $self->_fetch($_, $self->out_dir) : $self->_fetch($_, ''));
     push @checksum, $self->preprocessors->checksum(_ext($_), \$asset->slurp, $asset->url);
     $asset;
@@ -394,7 +408,7 @@ in different modes.
 See L<Mojolicious::Plugin::AssetPack::Manual::CustomDomain> for how to
 serve your assets from a custom host.
 
-=item * 
+=item *
 
 See L<Mojolicious::Plugin::AssetPack::Preprocessors> for details on the
 different (official) preprocessors.
